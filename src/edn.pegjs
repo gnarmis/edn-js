@@ -5,7 +5,7 @@
 
 root = top
 
-top = base_value
+top = space? base_value space?
 
 base_value
   = boolean
@@ -14,3 +14,5 @@ base_value
 boolean
   = "true" { return true; }
   / "false" { return false; }
+
+space = [ ,]+
