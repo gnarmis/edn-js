@@ -15,4 +15,33 @@ describe "Simple Specs", ->
     ).toEqual(undefined)
 
   it "should consumer integers", ->
- 
+    expect(
+      EDN.parse("42").integer
+    ).toEqual("42")&&
+    expect(
+      EDN.parse("-42").integer
+    ).toEqual("-42")&&
+    expect(
+      EDN.parse("42N").precision
+    ).toEqual("N")
+
+  it "should consume characters", ->
+    expect(
+      EDN.parse("\\\\").character
+    ).toEqual("\\\\")&&
+    expect(
+      EDN.parse("\\newline").character
+    ).toEqual("\\newline")&&
+    expect(
+      EDN.parse("\\space").character
+    ).toEqual("\\space")&&
+    expect(
+      EDN.parse("\\tab").character
+    ).toEqual("\\tab")
+
+  it "should not recognize \\ followed by a space as a character", ->
+    expect(
+      EDN.parse("\\ ")
+    ).toEqual(undefined)
+
+

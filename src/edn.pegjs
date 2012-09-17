@@ -1,3 +1,4 @@
+
 /*
  * Grammar for edn
  * The generated parser will be able to produce a JSON AST
@@ -28,4 +29,10 @@ integer
 space = a:[ ,]+ {return a.join("");}
 
 character
-  = a:(x:"\\" b:("newline"/"space"/"tab"/.?)?) { return a.join("").match(/[\x21-\x7e]/)!==null ? a.join("") : "";}
+  = a:"\\" 
+  b:("newline"/"space"/"tab"/(b:.
+  {if (b.match(/[\x21-\x7e]/)!==null) 
+    { 
+      return b;
+    }})) 
+  { c=a+b;return c.match(/(undefined)/)!==null ? undefined : {character: c};}
