@@ -6,9 +6,11 @@
   }
 
   describe("Simple Specs", function() {
-    beforeEach(function() {});
-    return it("should interpret addition", function() {
-      return expect(EDN.parse("1+1")).toEqual(2);
+    it("should consume Boolean values", function() {
+      return expect(EDN.parse("false")).toEqual(false) && expect(EDN.parse("true")).toEqual(true);
+    });
+    return it("should consume nil values", function() {
+      return expect(EDN.parse("nil")).toEqual("nil");
     });
   });
 

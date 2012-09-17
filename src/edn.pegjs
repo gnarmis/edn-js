@@ -3,20 +3,14 @@
  * "2*(3+4)". The parser generated from this grammar then computes their value.
  */
 
-start
-  = additive
+root = top
 
-additive
-  = left:multiplicative "+" right:additive { return left + right; }
-  / multiplicative
+top = base_value
 
-multiplicative
-  = left:primary "*" right:multiplicative { return left * right; }
-  / primary
+base_value
+  = boolean
+  / nil:"nil"
 
-primary
-  = integer
-  / "(" additive:additive ")" { return additive; }
-
-integer "integer"
-  = digits:[0-9]+ { return parseInt(digits.join(""), 10); }
+boolean
+  = "true" { return true; }
+  / "false" { return false; }
