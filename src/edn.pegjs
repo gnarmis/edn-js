@@ -20,17 +20,12 @@ boolean
 integer
   = a:[-+]?
     b:[0-9]+
-    c:"N"? { if (c) {
-               return {
-                 integer: a=="-" ? (a+b).join("") : b.join(""),
-                 precision: c
-               };}
-             else {
-               return {
-                 integer: a=="-" ? (a+b).join("") : b.join("")
-               };}}
+    c:"N"? { if (c){return {
+               integer: a=="-" ? (a+b).join("") : b.join(""),
+               precision: c};}else{return {
+               integer: a=="-" ? (a+b).join("") : b.join("")};}}
 
 space = a:[ ,]+ {return a.join("");}
 
 character
-  = a:("\\" ("newline"/"space"/"tab"/b:.?)?) { return { character: a.join("")};}
+  = a:(x:"\\" b:("newline"/"space"/"tab"/.?)?) { return a.join("").match(/[\x21-\x7e]/)!==null ? a.join("") : "";}
