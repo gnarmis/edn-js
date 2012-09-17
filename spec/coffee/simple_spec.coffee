@@ -12,4 +12,7 @@ describe "Simple Specs", ->
   it "should consume nil values", ->
     expect(
       EDN.parse("nil")
-    ).toEqual("nil")
+    ).toEqual(undefined)
+
+  it "should consumer integers", ->
+ 

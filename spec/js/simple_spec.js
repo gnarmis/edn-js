@@ -9,9 +9,10 @@
     it("should consume Boolean values", function() {
       return expect(EDN.parse("false")).toEqual(false) && expect(EDN.parse("true")).toEqual(true);
     });
-    return it("should consume nil values", function() {
-      return expect(EDN.parse("nil")).toEqual("nil");
+    it("should consume nil values", function() {
+      return expect(EDN.parse("nil")).toEqual(void 0);
     });
+    return it("should consumer integers", function() {});
   });
 
 }).call(this);

@@ -12,3 +12,4 @@ Right now, there's not much to see! I've setup the infrastructure and written a 
 
 - `pegjs src/edn.pegjs lib/edn.js` to build parser
 - `jasmine-node spec` to run all specs
+- unlike edn-ruby, which uses Parslet, pegjs seems to mix the parser and the transformer
