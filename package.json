@@ -1,0 +1,15 @@
+{
+  "name": "edn-js",
+  "description": "An edn parser in JavaScript.",
+  "version": "0.0.0",
+  "author": "Gursimran Singh (@gnarmis)",
+  "dependencies": {
+
+  },
+  "devDependencies": {
+    "pegjs": "",
+    "jasmine-node":"",
+    "coffee-script":""
+  },
+  "engine": "node 0.8.8"
+}
