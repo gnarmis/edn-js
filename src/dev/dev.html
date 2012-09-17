@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="author" content="David Majda (david@majda.cz)">
+    <meta name="copyright" content="Copyright &copy; 2010&ndash;2012 David Majda">
+    <meta name="keywords" content="parser generator, PEG, JavaScript">
+    <meta name="description" content="PEG.js is a parser generator for JavaScript based on the parsing expression grammar formalism.">
+    <title>Online version &raquo; PEG.js &ndash; Parser Generator for JavaScript</title>
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/layout-online.css">
+    <link rel="stylesheet" href="css/content.css">
+    <!--[if IE]>
+    <script>
+      var html5elements = ["aside", "footer", "header", "nav"];
+      for (var i = 0; i < html5elements.length; i++) {
+        document.createElement(html5elements[i]);
+      }
+    </script>
+    <![endif]-->
+  </head>
+  <body>
+    <header id="header">
+      <h1><a href="/">PEG.js</a></h1>
+      <h2>Parser Generator for JavaScript</h2>
+    </header>
+    <nav id="menu">
+      <a href="/">Home</a>
+      <a class="current" href="/online">Online Version</a>
+      <a href="/documentation">Documentation</a>
+      <a href="/development">Development</a>
+    </nav>
+
+    <div id="loader">
+      <div id="loader-inner">Loading...</div>
+    </div>
+
+    <div id="content">
+      <table id="columns">
+  <tr>
+    <td>
+      <table class="column" id="left-column">
+        <tr>
+          <td class="content-height">
+            <h2 class="suggestion top">
+              <span class="step-number">1</span>
+              <div class="step-title">Write your PEG.js grammar</div>
+            </h2>
+          </td>
+        </tr>
+      <input type="file" id="files" name="files[]" multiple />
+      <output id="list"></output>
+        <tr>
+          <td>
+            <div class="textarea-wrapper">
+              <textarea class="code" id="grammar" disabled>/*
+ * Classic example grammar, which recognizes simple arithmetic expressions like
+ * "2*(3+4)". The parser generated from this grammar then computes their value.
+ */
+
+start
+  = additive
+
+additive
+  = left:multiplicative "+" right:additive { return left + right; }
+  / multiplicative
+
+multiplicative
+  = left:primary "*" right:multiplicative { return left * right; }
+  / primary
+
+primary
+  = integer
+  / "(" additive:additive ")" { return additive; }
+
+integer "integer"
+  = digits:[0-9]+ { return parseInt(digits.join(""), 10); }</textarea>
+              <div class="tooltip">
+                <div class="content">The parser will be generated automatically as you type.</div>
+                <div class="arrow"></div>
+              </div>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="content-height">
+            <div id="build-message" class="message progress">Loading...</div>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td>
+      <table class="column" id="right-column">
+        <tr>
+          <td class="content-height">
+            <h2 class="suggestion top">
+              <span class="step-number">2</span>
+              <div class="step-title">Test the generated parser with some input</div>
+            </h2>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="textarea-wrapper">
+              <textarea class="code" id="input" disabled>2*(3+4)</textarea>
+              <div class="tooltip">
+                <div class="content">The input will be processed by the parser automatically as you type.</div>
+                <div class="arrow"></div>
+              </div>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="content-height">
+            <div id="parse-message" class="message disabled">Parser not available.</div>
+          </td>
+        </tr>
+        <tr>
+          <td class="content-height">
+            <h2 id="output-header">Output</h2>
+            <pre id="output" class="disabled">Output not available.</pre>
+          </td>
+        </tr>
+        <tr>
+          <td class="content-height">
+            <h2 class="suggestion">
+              <span class="step-number">3</span>
+              <div class="step-title">Download the parser code</div>
+            </h2>
+          </td>
+        </tr>
+        <tr>
+          <td class="content-height">
+            <a id="parser-download" class="disabled" href="#">Download parser</a>
+            <div id="settings">
+              <label for="parser-var">Parser variable:</label>
+              <input type="text" id="parser-var" value="module.exports" disabled>
+              <div id="options">
+                <input type="checkbox" id="option-cache" disabled>
+                <label for="option-cache">Use results cache</label>
+                <input type="checkbox" id="option-track-line-and-column" disabled>
+                <label for="option-track-line-and-column">Track line and column</label>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+
+<script src="vendor/jquery/jquery.js"></script>
+<script src="vendor/pegjs/peg.js"></script>
+<script src="vendor/base64/webtoolkit.base64.js"></script>
+<script src="vendor/jsdump/jsDump.js"></script>
+<script src="js/online.js"></script>
+<script>
+  // Check for the various File API support.
+  if (window.File && window.FileReader && window.FileList && window.Blob) {
+    // Great success! All the File APIs are supported.
+
+  } else {
+    alert('The File APIs are not fully supported in this browser.');
+  }
+</script>
+<script>
+  function handleFileSelect(evt) {
+    var files = evt.target.files; // FileList object
+
+    // Loop through the FileList
+    for (var i = 0, f; f = files[i]; i++) {
+
+      var reader = new FileReader();
+
+      // Closure to capture the file information.
+      reader.onload = (function(theFile) {
+        return function(e) {
+          var txtarea = document.getElementById('grammar');
+          txtarea.innerHTML = e.target.result;
+        };
+      })(f);
+
+      // Read in the file as text
+      reader.readAsText(f, 'UTF-8');
+    }
+  }
+
+  document.getElementById('files').addEventListener('change', handleFileSelect, false);
+</script>
+    </div>
+  </body>
+</html>

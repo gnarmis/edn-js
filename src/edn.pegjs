@@ -1,6 +1,6 @@
 /*
- * Classic example grammar, which recognizes simple arithmetic expressions like
- * "2*(3+4)". The parser generated from this grammar then computes their value.
+ * Grammar for edn
+ * The generated parser will be able to produce a JSON AST
  */
 
 root = top

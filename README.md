@@ -14,3 +14,4 @@ Right now, there's not much to see! I've setup the infrastructure and written a 
 - `jasmine-node spec` to run all specs
 - unlike edn-ruby, which uses Parslet, pegjs seems to mix the parser and the transformer
 - I decided to make a parser to produce a JSON AST first and then worry about a transformer later
+- Created `src/dev` from peg.js's online development environment. Added ability to select file (edn.pegjs) and insert its contents into the appropriate textarea.
