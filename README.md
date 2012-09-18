@@ -1,12 +1,14 @@
 # edn-js
 
-A [PEG.js](https://github.com/dmajda/pegjs) generated [edn](https://github.com/edn-format/edn) parser in JavaScript.
+*Update: putting this in the freezer for now since there are some JS [implementations](https://github.com/edn-format/edn/wiki/Implementations) already, and I'd rather start using edn immediately. Feel free to pick through this!
 
-Right now, there's not much to see! I've setup the infrastructure and written a simple spec using the pegjs standard example.
+This is a [PEG.js](https://github.com/dmajda/pegjs) generated [edn](https://github.com/edn-format/edn) parser in JavaScript.
+
+I've setup the infrastructure and written a simple spec using the pegjs standard example. A few of the basic values can be consumed. Check out `spec/coffee/simple_spec.coffee`.
 
 ## Testing
 
-- I'm writing specs in CoffeeScript, and using the following to auto-compile them: `coffee -o spec/js -cw spec/coffee/*`
+Specs are in CoffeeScript, and using the following to auto-compile them: `coffee -o spec/js -cw spec/coffee/*`
 
 ## Development Notes
 
